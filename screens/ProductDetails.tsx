@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {SIZES, COLORS} from '../constants';
 import {ActivityIndicator} from 'react-native';
+import React from 'react';
 
 interface Product {
   id: number;

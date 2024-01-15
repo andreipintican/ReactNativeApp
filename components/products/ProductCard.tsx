@@ -2,8 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useAuth} from '../../context/AuthContext';
 
 interface Product {
+  id: number;
   title: string;
   images: string[];
   brand: string;
@@ -15,22 +17,27 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({item}) => {
+  const {authState}: any = useAuth();
+
   const navigation = useNavigation();
 
   const handleProductPress = () => {
-    navigation.navigate('ProductDetails', { id: item.id });
+    navigation.navigate('ProductDetails', {id: item.id});
   };
 
   const handleAddToCartPress = () => {
-    navigation.navigate('Cart');
+    if (authState.authenticated) {
+      return navigation.navigate('Cart');
+    }
+    return navigation.navigate('Login');
   };
 
   return (
-    <TouchableOpacity style={{ flex: 1 }} onPress={handleProductPress}>
+    <TouchableOpacity style={{flex: 1}} onPress={handleProductPress}>
       <View style={styles.card}>
-        <Text style={{ marginBottom: 5, fontFamily: 'bold' }}>{item.title}</Text>
+        <Text style={{marginBottom: 5, fontFamily: 'bold'}}>{item.title}</Text>
         {item.images[0] ? (
-          <Image style={styles.image} source={{ uri: item.images[0] }} />
+          <Image style={styles.image} source={{uri: item.images[0]}} />
         ) : (
           <Text>No Image Available</Text>
         )}

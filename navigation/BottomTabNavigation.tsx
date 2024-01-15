@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Search, Profile} from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {COLORS, SIZES} from '../constants/index';
+import {COLORS} from '../constants/index';
 
 const Tab = createBottomTabNavigator();
 
