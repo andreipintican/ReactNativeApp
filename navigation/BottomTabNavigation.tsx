@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Search, Profile} from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {COLORS} from '../constants/index';
+import {COLORS, SIZES} from '../constants/index';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +16,9 @@ const screenOptions: object = {
     right: 0,
     left: 0,
     elevation: 0,
-    height: 70,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    height: 60,
   },
 };
 

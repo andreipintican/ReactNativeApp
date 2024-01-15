@@ -35,7 +35,7 @@ const Products = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    paddingBottom: 430,
+    paddingBottom: 400,
   },
   card: {
     margin: 5,
