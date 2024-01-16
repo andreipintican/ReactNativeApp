@@ -1,8 +1,13 @@
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import styles from './welcome.style';
+import {View, TouchableOpacity} from 'react-native';
+import {
+  Container,
+  WelcomeText,
+  SearchContainer,
+  SearchIcon,
+  SearchWrapper,
+  SearchInput,
+} from './WelcomeStyles';
 import React from 'react';
-import {COLORS, SIZES} from '../../constants';
-import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
 const Welcome = () => {
@@ -10,26 +15,22 @@ const Welcome = () => {
 
   return (
     <View>
-      <View style={styles.container}>
-        <Text style={styles.welcomeTxt(COLORS.black, SIZES.xSmall)}>
-          {' '}
-          List Of Products
-        </Text>
-      </View>
+      <Container>
+        <WelcomeText>List Of Products</WelcomeText>
+      </Container>
 
-      <View style={styles.searchContainer}>
+      <SearchContainer>
         <TouchableOpacity>
-          <Feather name="search" size={24} style={styles.searchIcon} />
+          <SearchIcon name="search" size={24} />
         </TouchableOpacity>
-        <View style={styles.searchWrapper}>
-          <TextInput
-            style={styles.searchInput}
+        <SearchWrapper>
+          <SearchInput
             value=""
             onPressIn={() => navigation.navigate('Search')}
             placeholder="What are you looking for ?"
           />
-        </View>
-      </View>
+        </SearchWrapper>
+      </SearchContainer>
     </View>
   );
 };

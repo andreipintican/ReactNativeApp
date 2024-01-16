@@ -21,8 +21,6 @@ const AuthProvider = ({children}: any) => {
     username: null,
   });
 
-  console.log('here');
-
   useEffect(() => {
     const loadToken = async () => {
       const token = await AsyncStorage.getItem('token');

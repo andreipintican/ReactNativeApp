@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Search, Profile} from '../screens';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import {COLORS} from '../constants/index';
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +47,7 @@ const BottomTabNavigation = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Icon
-                name={'search-plus'}
+                name={'search'}
                 size={24}
                 color={focused ? COLORS.primary : COLORS.gray}
               />
@@ -62,7 +62,7 @@ const BottomTabNavigation = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Icon
-                name={focused ? 'user-circle' : 'user-circle'}
+                name={focused ? 'user' : 'user'}
                 size={24}
                 color={focused ? COLORS.primary : COLORS.gray}
               />

@@ -1,26 +1,31 @@
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import styles from './home.style';
-import {Welcome} from '../components';
-import Products from '../components/products/Products';
+import {
+  AppBarWrapper,
+  AppBar,
+  CartCountWrapper,
+  CartNumberText,
+} from './HomeStyles';
+import {Welcome} from '../../components';
+import Products from '../../components/products/Products';
 
 const Home = () => {
   return (
     <SafeAreaView>
-      <View style={styles.appBarWrapper}>
-        <View style={styles.appBar}>
+      <AppBarWrapper>
+        <AppBar>
           <View style={{alignItems: 'flex-end'}}>
-            <View style={styles.cartCount}>
-              <Text style={styles.cartNumber}>0</Text>
-            </View>
+            <CartCountWrapper>
+              <CartNumberText>0</CartNumberText>
+            </CartCountWrapper>
             <TouchableOpacity>
               <Fontisto name="shopping-bag" size={24} />
             </TouchableOpacity>
           </View>
-        </View>
-      </View>
+        </AppBar>
+      </AppBarWrapper>
       <Welcome />
       <Products />
     </SafeAreaView>
@@ -28,5 +33,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const style = StyleSheet.create({});
