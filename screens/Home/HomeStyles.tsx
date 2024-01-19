@@ -11,6 +11,9 @@ export const AppBar = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
+export const HeaderContainer = styled.View`
+  align-items: flex-end;
+`;
 
 export const CartCountWrapper = styled.View`
   position: absolute;
@@ -22,6 +25,12 @@ export const CartCountWrapper = styled.View`
   background-color: green;
   justify-content: center;
   z-index: 999;
+`;
+
+export const WelcomeText = styled.Text`
+  font-size: ${SIZES.xxLarge - 20}px;
+  margin-horizontal: ${SIZES.small}px;
+  color: ${COLORS.primary};
 `;
 
 export const CartNumberText = styled.Text`

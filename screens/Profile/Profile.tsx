@@ -52,13 +52,18 @@ const Profile: React.FC<ProfileProps> = props => {
         setUser(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching profile data:', error);
+        handleExpiredToken();
         setLoading(false);
       }
     };
 
     fetchData();
   }, [authState.token]);
+
+  const handleExpiredToken = () => {
+    onLogout();
+    props.navigation.navigate('Login');
+  }
 
   const handleLogout = () => {
     onLogout();

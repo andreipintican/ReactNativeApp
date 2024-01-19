@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { SIZES, COLORS } from '../../constants';
+import {SIZES, COLORS} from '../../constants';
 
 export const Container = styled.View`
   flex: 1;
@@ -18,7 +18,7 @@ export const ImageContainer = styled.View`
 
 export const ProductImage = styled.Image`
   flex: 1;
-  resizeMode: cover;
+  resizemode: cover;
 `;
 
 export const UpperRow = styled.View`
@@ -66,16 +66,37 @@ export const CartRow = styled.View`
   padding-bottom: ${SIZES.small}px;
   flex-direction: row;
   align-items: center;
-  width: 110px;
+  width: 100%;
+`;
+
+export const QuantityContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+`;
+
+export const QuantityButton = styled.TouchableOpacity`
+  width: 45px;
+  height: 45px;
+  padding: ${SIZES.small}px;
+  border-radius: 50px;
+  background-color: ${COLORS.black};
+  align-items: center;
+`;
+
+export const QuantityText = styled.Text`
+  font-size: 18px;
+  margin: 0 10px;
 `;
 
 export const AddCartButton = styled.TouchableOpacity`
   margin-horizontal: 28px;
-  width: 100%;
+  width: 50%;
   height: 47px;
   padding: ${SIZES.small}px;
   border-radius: 50px;
   background-color: ${COLORS.black};
+  align-items: center;
 `;
 
 export const CartTitle = styled.Text`

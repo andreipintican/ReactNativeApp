@@ -4,9 +4,13 @@ import ProductCard from './ProductCard';
 
 const productsURL = 'https://dummyjson.com/products';
 
-const Products = () => {
+const Products = ({products}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
+  if (products) {
+    setData(products);
+  }
 
   useEffect(() => {
     fetch(productsURL)
@@ -35,7 +39,7 @@ const Products = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    paddingBottom: 400,
+    // paddingBottom: 315,
   },
   card: {
     margin: 5,

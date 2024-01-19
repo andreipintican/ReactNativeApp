@@ -1,7 +1,5 @@
 import {View, TouchableOpacity} from 'react-native';
 import {
-  Container,
-  WelcomeText,
   SearchContainer,
   SearchIcon,
   SearchWrapper,
@@ -15,10 +13,6 @@ const Welcome = () => {
 
   return (
     <View>
-      <Container>
-        <WelcomeText>List Of Products</WelcomeText>
-      </Container>
-
       <SearchContainer>
         <TouchableOpacity>
           <SearchIcon name="search" size={24} />

@@ -14,9 +14,19 @@ import {
   CartRow,
   AddCartButton,
   CartTitle,
+  QuantityButton,
+  QuantityContainer,
+  QuantityText,
 } from './ProductDetailsStyles';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../../constants';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  addToCart,
+  incrementQuantity,
+  decrementQuantity,
+  removeFromCart,
+} from '../../store/CartReducer';
 
 interface Product {
   id: number;
@@ -51,6 +61,38 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
       .finally(() => setLoading(false));
   }, [productURL]);
 
+  const dispatch = useDispatch();
+
+  const cartItem = useSelector(state =>
+    state.cart.cart.find(item => item.id === id),
+  );
+
+  console.log('cartItem found ', cartItem);
+
+  const addItemToCart = (item: any) => {
+    dispatch(addToCart(item));
+  };
+
+  const removeItemFromCart = (item: any) => {
+    dispatch(removeFromCart(item));
+  };
+
+  const increaseQuantity = (item: any) => {
+    if (!item.quantity) {
+      dispatch(addToCart(item));
+    }
+    dispatch(incrementQuantity(item));
+  };
+  const decreaseQuantity = (item: any) => {
+    if (item.quantity == 1) {
+      dispatch(removeFromCart(item));
+    } else if (!item.quantity) {
+      return;
+    } else {
+      dispatch(decrementQuantity(item));
+    }
+  };
+
   return (
     <Container>
       <UpperRow>
@@ -70,11 +112,37 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
             <TitleText>$ {data?.price}</TitleText>
           </TitleRow>
           <DescriptionText>{data?.description}</DescriptionText>
-          <CartRow>
-            <AddCartButton onPress={() => {}}>
-              <CartTitle>Add to cart</CartTitle>
-            </AddCartButton>
-          </CartRow>
+          {cartItem ? (
+            <CartRow>
+              <AddCartButton onPress={() => removeItemFromCart(cartItem)}>
+                <CartTitle>Remove from cart</CartTitle>
+              </AddCartButton>
+              <QuantityContainer>
+                <QuantityButton onPress={() => decreaseQuantity(cartItem)}>
+                  <CartTitle>-</CartTitle>
+                </QuantityButton>
+                <QuantityText>{cartItem.quantity}</QuantityText>
+                <QuantityButton onPress={() => increaseQuantity(cartItem)}>
+                  <CartTitle>+</CartTitle>
+                </QuantityButton>
+              </QuantityContainer>
+            </CartRow>
+          ) : (
+            <CartRow>
+              <AddCartButton onPress={() => addItemToCart(data)}>
+                <CartTitle>Add to cart</CartTitle>
+              </AddCartButton>
+              <QuantityContainer>
+                <QuantityButton onPress={() => decreaseQuantity(data)}>
+                  <CartTitle>-</CartTitle>
+                </QuantityButton>
+                <QuantityText>1</QuantityText>
+                <QuantityButton onPress={() => increaseQuantity(data)}>
+                  <CartTitle>+</CartTitle>
+                </QuantityButton>
+              </QuantityContainer>
+            </CartRow>
+          )}
         </DetailsContainer>
       )}
     </Container>

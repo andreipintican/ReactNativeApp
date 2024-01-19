@@ -3,17 +3,6 @@ import {COLORS, SIZES} from '../../constants';
 
 import Feather from 'react-native-vector-icons/Feather';
 
-export const Container = styled.View`
-  width: 100%;
-`;
-
-export const WelcomeText = styled.Text`
-  font-size: ${SIZES.xxLarge - 20}px;
-  margin-top: 10px;
-  margin-horizontal: ${SIZES.small}px;
-  color: ${COLORS.primary};
-`;
-
 export const SearchContainer = styled.View`
   flex-direction: row;
   justify-content: center;

@@ -3,6 +3,9 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useAuth} from '../../context/AuthContext';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCart, removeFromCart} from '../../store/CartReducer';
+import { COLORS } from '../../constants';
 
 interface Product {
   id: number;
@@ -32,23 +35,44 @@ const ProductCard: React.FC<ProductCardProps> = ({item}) => {
     return navigation.navigate('Login');
   };
 
+  const cart = useSelector(state => state.cart.cart);
+  console.log(cart);
+  const dispatch = useDispatch();
+
+  const addItemToCart = (item: any) => {
+    dispatch(addToCart(item));
+  };
+  const removeItemFromCart = (item: any) => {
+    dispatch(removeFromCart(item));
+  };
+
   return (
     <TouchableOpacity style={{flex: 1}} onPress={handleProductPress}>
       <View style={styles.card}>
-        <Text style={{marginBottom: 5, fontFamily: 'bold'}}>{item.title}</Text>
+        <Text style={{marginBottom: 8, fontWeight: 800}}>{item.title}</Text>
         {item.images[0] ? (
           <Image style={styles.image} source={{uri: item.images[0]}} />
         ) : (
           <Text>No Image Available</Text>
         )}
         <View style={styles.details}>
-          <Text>{item.brand}</Text>
-          <Text>{item.price}$</Text>
+          <Text style={{fontWeight: 800, color: COLORS.red}}>{item.discountPercentage}%</Text>
+          <Text style={{marginBottom: 8, fontWeight: 800}}>{item.price}$</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.addBtn} onPress={handleAddToCartPress}>
-        <Ionicons name="add-circle" size={30} />
-      </TouchableOpacity>
+      {cart.some((value: {id: number}) => value.id == item.id) ? (
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => removeItemFromCart(item)}>
+          <Ionicons name="remove-circle" size={30} color={COLORS.red} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => addItemToCart(item)}>
+          <Ionicons name="add-circle" size={30} color={COLORS.primary} />
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   );
 };
@@ -61,6 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: 'center',
     shadowOpacity: 0.2,
+    flexGrow: 1,
   },
   image: {
     aspectRatio: 1,
@@ -72,8 +97,8 @@ const styles = StyleSheet.create({
   },
   addBtn: {
     position: 'absolute',
-    right: 10,
-    bottom: 10,
+    right: 15,
+    bottom: 15,
   },
 });
 
